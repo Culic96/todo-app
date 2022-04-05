@@ -3,7 +3,9 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle({
   body: {
-    fontSize: "30px",
+    margin: 0,
+    padding: 0,
+    boxSizing: "border-box",
   },
 });
 

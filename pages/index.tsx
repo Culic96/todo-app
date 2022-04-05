@@ -1,8 +1,16 @@
+import { Auth } from "firebase/auth";
 import type { NextPage } from "next";
-import Hello from "../components/Hello";
-
+import { useState } from "react";
+import LoginForm from "../components/LoginForm";
+import { auth } from "../firebaseFunctions";
 const Home: NextPage = () => {
-  return <Hello />;
+  const [user, setUser] = useState<Auth | null>(null);
+
+  return (
+    <div>
+      <LoginForm existingUser={user} />
+    </div>
+  );
 };
 
 export default Home;
