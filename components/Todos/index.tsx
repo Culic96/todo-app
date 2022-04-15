@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { TodoHolder, TodoAdd } from "./style";
+import { TodoHolder, TodoAdd, TodoAddDiv, TodoCardHolder } from "./style";
 import { db, IRecipe } from "../../firebaseFunctions/firestore";
 import { doc, setDoc } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
@@ -58,38 +58,42 @@ export const Todos: FC<{
   return (
     <>
       <TodoHolder>
-        <TodoAdd>
-          <form onSubmit={handleTodoFormSubmit}>
-            <label>
-              Todo Heading
-              <input
-                type="text"
-                required
-                value={heading}
-                onChange={(e) => setHeading(e.target.value)}
-              />
-            </label>
-            <label>
-              Todo desc
-              <input
-                type="text"
-                required
-                value={desc}
-                onChange={(e) => setDesc(e.target.value)}
-              />
-            </label>
-            <button type="submit">Add a new Todo</button>
-          </form>
-        </TodoAdd>
-        {todos?.map((todo) => {
-          return (
-            <TodoAdd key={todo.id}>
-              <h3>Heading: {todo.heading}</h3>
-              <p>Your Desc: {todo.desc}</p>
-              <button onClick={() => deleteTodo(todo.id)}>Delete Todo</button>
-            </TodoAdd>
-          );
-        })}
+        <TodoAddDiv>
+          <TodoAdd>
+            <form onSubmit={handleTodoFormSubmit}>
+              <label>
+                Todo Heading
+                <input
+                  type="text"
+                  required
+                  value={heading}
+                  onChange={(e) => setHeading(e.target.value)}
+                />
+              </label>
+              <label>
+                Todo desc
+                <input
+                  type="text"
+                  required
+                  value={desc}
+                  onChange={(e) => setDesc(e.target.value)}
+                />
+              </label>
+              <button type="submit">Add a new Todo</button>
+            </form>
+          </TodoAdd>
+        </TodoAddDiv>
+        <TodoCardHolder>
+          {todos?.map((todo) => {
+            return (
+              <TodoAdd key={todo.id}>
+                <h3>{todo.heading}</h3>
+                <p>{todo.desc}</p>
+                <button onClick={() => deleteTodo(todo.id)}>Delete Todo</button>
+              </TodoAdd>
+            );
+          })}
+        </TodoCardHolder>
       </TodoHolder>
     </>
   );

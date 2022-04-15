@@ -12,17 +12,7 @@ const SignInUp = () => {
 
   return (
     <>
-      <Header>
-        {!auth ? (
-          <h1>Todo-App</h1>
-        ) : (
-          <>
-            <h1>Todo-app</h1>
-            <h4>Welcome back {auth.email}</h4>
-            <SignUpButton onClick={logoutUser}>Logout</SignUpButton>
-          </>
-        )}
-      </Header>
+      <Header></Header>
       <div
         style={{
           height: "200px",

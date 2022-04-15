@@ -1,10 +1,25 @@
-import { HeaderContainer } from "./style";
+import { useAuth } from "../../Hooks/useAuth";
+import { HeaderContainer, HeaderLogo, UserInfo } from "./style";
 
-const Header = ({ children }: { children: any }) => {
+const Header = () => {
+  const { auth, logoutUser } = useAuth();
+
   return (
-    <div style={{ overflow: "hidden" }}>
-      <HeaderContainer>{children}</HeaderContainer>
-    </div>
+    <>
+      <HeaderContainer>
+        <HeaderLogo>
+          <h1>
+            TODO <span>App</span>
+          </h1>
+        </HeaderLogo>
+        {auth && (
+          <UserInfo>
+            <h4>Welcome back {auth?.email} </h4>
+            <button onClick={logoutUser}>Logout</button>
+          </UserInfo>
+        )}
+      </HeaderContainer>
+    </>
   );
 };
 
