@@ -1,14 +1,19 @@
-import { Auth } from "firebase/auth";
 import type { NextPage } from "next";
-import { useState } from "react";
-import LoginForm from "../components/LoginForm";
-import { auth } from "../firebaseFunctions";
-const Home: NextPage = () => {
-  const [user, setUser] = useState<Auth | null>(null);
+import SignInUp from "../components/SignInUp";
+import styled from "styled-components";
+import Todos from "../components/Todos";
+export const Container = styled.div({
+  height: "100%",
+  width: "100vw",
+});
 
+const Home: NextPage = () => {
   return (
     <div>
-      <LoginForm existingUser={user} />
+      <Container>
+        <SignInUp />
+        <Todos />
+      </Container>
     </div>
   );
 };

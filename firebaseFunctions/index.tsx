@@ -9,13 +9,13 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 // import { connectStorageEmulator, getStorage } from "firebase/storage";
 import getConfig from "next/config";
 const isEmulatorEnabled = true;
 
 const { publicRuntimeConfig } = getConfig();
-console.log("firebase config: ", publicRuntimeConfig.firebaseConfig);
 
 const firebaseApp = initializeApp(publicRuntimeConfig.firebaseConfig);
 const auth = getAuth(firebaseApp);
@@ -39,5 +39,23 @@ const registerUser = (email: string, password: string) => {
   return createUserWithEmailAndPassword(auth, email, password);
 };
 
+const resetPassword = (email: string) => {
+  return sendPasswordResetEmail(auth, email);
+};
+
+const subscribeToAuthChanges = (handleAuthChanges: any) => {
+  auth.onAuthStateChanged((user) => {
+    handleAuthChanges(user);
+  });
+};
+
 export default firebaseApp;
-export { auth, firestore, getCollection, loginUser, registerUser };
+export {
+  auth,
+  firestore,
+  getCollection,
+  loginUser,
+  registerUser,
+  resetPassword,
+  subscribeToAuthChanges,
+};
