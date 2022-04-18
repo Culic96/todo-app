@@ -1,13 +1,5 @@
 import type { AppProps } from "next/app";
 import { createGlobalStyle } from "styled-components";
-<<<<<<< Updated upstream
-
-const GlobalStyle = createGlobalStyle({
-  body: {
-    fontSize: "30px",
-  },
-});
-=======
 import { AuthProvider } from "../Hooks/useAuth";
 
 const GlobalStyle = createGlobalStyle`
@@ -21,19 +13,14 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Roboto', sans-serif;
   }
 `;
->>>>>>> Stashed changes
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <GlobalStyle />
-<<<<<<< Updated upstream
-      <Component {...pageProps} />
-=======
       <AuthProvider>
         <Component {...pageProps} />
       </AuthProvider>
->>>>>>> Stashed changes
     </>
   );
 }
