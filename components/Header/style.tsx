@@ -7,8 +7,8 @@ export const HeaderContainer = styled.div({
   backgroundColor: "#229ED9",
   color: "#fff",
   margin: 0,
-  boxShadow: "0 5px 3px -3px #22EEDD",
-  // borderBottom: "2px solid #22EEDD",
+  boxShadow: "0 3px 10px -3px rgba(0, 0, 0, 0.25)",
+  borderBottom: "2px solid #22EEDD",
 });
 
 export const HeaderLogo = styled.div({

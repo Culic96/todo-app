@@ -15,6 +15,7 @@ const SignInUp = () => {
       <Header></Header>
       <div
         style={{
+          height: "200px",
           width: "100vw",
           margin: 0,
           padding: 0,

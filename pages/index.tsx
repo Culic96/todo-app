@@ -1,8 +1,21 @@
 import type { NextPage } from "next";
-import Hello from "../components/Hello";
+import SignInUp from "../components/SignInUp";
+import styled from "styled-components";
+import Todos from "../components/Todos";
+export const Container = styled.div({
+  height: "100%",
+  width: "100vw",
+});
 
 const Home: NextPage = () => {
-  return <Hello />;
+  return (
+    <div>
+      <Container>
+        <SignInUp />
+        <Todos />
+      </Container>
+    </div>
+  );
 };
 
 export default Home;
