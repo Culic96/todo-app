@@ -73,7 +73,7 @@ export const TodoEditDelete = styled.div<{ isOpen: boolean }>(
     },
   },
   ({ isOpen }) => ({
-    ...(!isOpen && {
+    ...(isOpen && {
       opacity: 1,
       display: "flex",
     }),

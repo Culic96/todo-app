@@ -6,7 +6,7 @@ import {
   faCheck,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { ITodo } from "../../firebaseFunctions/firestore";
 import {
   TodoAdded,
@@ -22,11 +22,16 @@ import {
 const Todo: FC<{
   todo: ITodo;
   deleteTodo: (id: string | undefined) => void;
-  editTodo: (todo: ITodo) => void;
-}> = ({ todo, deleteTodo, editTodo }) => {
+  addOrEditTodo: (todo: ITodo) => void;
+  todoEditCancel: (todo: ITodo) => void;
+}> = ({ todo, deleteTodo, addOrEditTodo, todoEditCancel }) => {
   const [isEditOpen, setIsEditOpen] = useState(false);
-  const [isEditMode, setIsEditMode] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(!todo.id);
   const [editedTodo, setEditedTodo] = useState<ITodo>(todo);
+
+  useEffect(() => {
+    console.log(`[ToDo] id = ${editedTodo.id}`);
+  }, []);
 
   return (
     <>
@@ -66,13 +71,15 @@ const Todo: FC<{
                       cursor: "pointer",
                     }}
                     onClick={() => {
-                      setIsEditMode(!isEditMode), editTodo(editedTodo);
+                      setIsEditMode(!isEditMode);
+                      addOrEditTodo(editedTodo);
                     }}
                   />
                   <FontAwesomeIcon
                     onClick={() => {
                       setIsEditMode(false);
                       setEditedTodo(todo);
+                      todoEditCancel(todo);
                     }}
                     icon={faTimes}
                     color="red"
@@ -105,9 +112,8 @@ const Todo: FC<{
                   <FontAwesomeIcon
                     icon={faEdit}
                     onClick={() => {
-                      editTodo(editedTodo),
-                        setIsEditMode(!isEditMode),
-                        setIsEditOpen(!isEditOpen);
+                      addOrEditTodo(editedTodo);
+                      setIsEditMode(true);
                     }}
                   />
                 </p>

@@ -9,7 +9,7 @@ import {
   AddTodoBtn,
 } from "./style";
 import { db, ITodo } from "../../firebaseFunctions/firestore";
-import { doc, setDoc } from "firebase/firestore";
+import { addDoc, doc, setDoc } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { deleteDoc, getDoc } from "firebase/firestore";
 import Todo from "../Todo";
@@ -17,24 +17,21 @@ import Todo from "../Todo";
 export const Todos: FC<{
   existingTodo?: (ITodo & { id: string }) | null;
 }> = () => {
-  const [heading, setHeading] = useState("");
-  const [desc, setDesc] = useState("");
   const [todos, setTodos] = useState<ITodo[]>([]);
   const [todosDb] = useCollectionData<ITodo>(db.todos);
-  const handleAddTodo = async (newTodo: ITodo) => {
-    try {
-      await setDoc<ITodo>(doc(db.todos), newTodo);
-      setTodos([...todos, newTodo]);
-    } catch (err: any) {
-      alert(err.message);
-      throw err;
-    }
-  };
+  // const handleAddTodo = async (newTodo: ITodo) => {
+  //   try {
+  //     await setDoc<ITodo>(doc(db.todos), newTodo);
+  //     setTodos([...todos, newTodo]);
+  //   } catch (err: any) {
+  //     alert(err.message);
+  //     throw err;
+  //   }
+  // };
 
-  const resetForm = () => {
-    setHeading("");
-    setDesc("");
-  };
+  useEffect(() => {
+    console.log("[TODOS] Component did mount");
+  }, []);
 
   const deleteTodo = async (id: string | undefined) => {
     if (id) {
@@ -43,8 +40,8 @@ export const Todos: FC<{
     }
   };
 
-  const editTodo = async (todo: ITodo) => {
-    if (todo) {
+  const addOrEditTodo = async (todo: ITodo) => {
+    if (todo.id) {
       setDoc(
         doc(db.todos, todo.id),
         {
@@ -53,7 +50,21 @@ export const Todos: FC<{
         },
         { merge: true }
       );
+    } else {
+      const docRef = await addDoc(db.todos, todo);
+      console.log(docRef);
+      // Case where we create new todo
     }
+  };
+
+  const addNewTodo = () => {
+    setTodos([
+      {
+        heading: "New Todo",
+        desc: "",
+      },
+      ...todos,
+    ]);
   };
 
   useEffect(() => {
@@ -62,31 +73,25 @@ export const Todos: FC<{
     }
   }, [todosDb]);
 
-  const handleTodoFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const newTodo = {
-      heading,
-      desc,
-    };
-    handleAddTodo(newTodo);
-    resetForm();
-  };
   return (
     <>
       <TodoHolder>
         <TodoAddDiv>
-          <AddTodoBtn>Add a new Todo</AddTodoBtn>
+          <AddTodoBtn onClick={addNewTodo}>Add a new Todo</AddTodoBtn>
         </TodoAddDiv>
         <GridWrapper>
           <ScrollContainer>
             <TodoCardHolder>
-              {todos?.map((todo) => {
+              {todos?.map((todo, index) => {
                 return (
                   <Todo
-                    key={todo.id}
+                    key={todo.id || index}
                     todo={todo}
                     deleteTodo={deleteTodo}
-                    editTodo={editTodo}
+                    addOrEditTodo={addOrEditTodo}
+                    todoEditCancel={() => {
+                      setTodos(todos.slice(1));
+                    }}
                   />
                 );
               })}
