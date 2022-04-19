@@ -1,9 +1,12 @@
 import styled from "styled-components";
 
 export const ModalBody = styled.div({
-  position: "relative",
+  position: "absolute",
   width: "50vw",
   height: "80vh",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   backgroundColor: "#229ED9",
   marginTop: "10vh",
   // marginLeft: "35vw",

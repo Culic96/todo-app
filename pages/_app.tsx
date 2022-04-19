@@ -15,11 +15,12 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const AnyComponent = Component as any;
   return (
     <>
       <GlobalStyle />
       <AuthProvider>
-        <Component {...pageProps} />
+        <AnyComponent {...pageProps} />
       </AuthProvider>
     </>
   );

@@ -4,14 +4,14 @@ import {
   ScrollContainer,
   GridWrapper,
   TodoCardHolder,
+  TodoAddDiv,
+  TodoAdd,
+  AddTodoBtn,
 } from "./style";
 import { db, ITodo } from "../../firebaseFunctions/firestore";
 import { doc, setDoc } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import { deleteDoc } from "firebase/firestore";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faCode, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
+import { deleteDoc, getDoc } from "firebase/firestore";
 import Todo from "../Todo";
 
 export const Todos: FC<{
@@ -21,11 +21,6 @@ export const Todos: FC<{
   const [desc, setDesc] = useState("");
   const [todos, setTodos] = useState<ITodo[]>([]);
   const [todosDb] = useCollectionData<ITodo>(db.todos);
-
-  useEffect(() => {
-    if (todosDb) {
-    }
-  }, [todosDb]);
 
   const handleAddTodo = async (newTodo: ITodo) => {
     try {
@@ -49,6 +44,19 @@ export const Todos: FC<{
     }
   };
 
+  const editTodo = async (todo: ITodo) => {
+    if (todo) {
+      setDoc(
+        doc(db.todos, todo.id),
+        {
+          heading: todo.heading,
+          desc: todo.desc,
+        },
+        { merge: true }
+      );
+    }
+  };
+
   useEffect(() => {
     if (todosDb) {
       setTodos(todosDb);
@@ -67,11 +75,21 @@ export const Todos: FC<{
   return (
     <>
       <TodoHolder>
+        <TodoAddDiv>
+          <AddTodoBtn>Add a new Todo</AddTodoBtn>
+        </TodoAddDiv>
         <GridWrapper>
           <ScrollContainer>
             <TodoCardHolder>
               {todos?.map((todo) => {
-                return <Todo key={todo.id} todo={todo} />;
+                return (
+                  <Todo
+                    key={todo.id}
+                    todo={todo}
+                    deleteTodo={deleteTodo}
+                    editTodo={editTodo}
+                  />
+                );
               })}
             </TodoCardHolder>
           </ScrollContainer>
