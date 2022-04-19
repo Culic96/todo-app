@@ -70,7 +70,10 @@ const Todo: FC<{
                     }}
                   />
                   <FontAwesomeIcon
-                    onClick={() => setIsEditMode(!isEditMode)}
+                    onClick={() => {
+                      setIsEditMode(false);
+                      setEditedTodo(todo);
+                    }}
                     icon={faTimes}
                     color="red"
                     style={{ cursor: "pointer" }}
