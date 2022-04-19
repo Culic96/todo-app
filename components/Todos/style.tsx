@@ -8,10 +8,13 @@ export const TodoHolder = styled.div({
 });
 
 export const TodoAddDiv = styled.div({
-  width: "30vw",
+  width: "25vw",
   height: "100%",
-  top: 0,
-  left: 0,
+  borderRight: "2px solid black",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
 });
 
 export const TodoCardHolder = styled.div({
@@ -71,7 +74,7 @@ export const TodoAdd = styled.div({
       color: "#22333B",
       borderRadius: "25px",
       backgroundColor: "#fff",
-      border: "2px solid #2229ED9",
+      border: "2px solid #229ED9",
       transition: "all 1s ease",
     },
   },
@@ -107,5 +110,26 @@ export const TodoAdd = styled.div({
     color: "#22333B",
     fontSize: "1.3rem",
     maxWidth: "90%",
+  },
+});
+
+export const AddTodoBtn = styled.button({
+  fontFamily: "inherit",
+  fontSize: "1rem",
+  color: "#fff",
+  backgroundColor: "#229ED9",
+  padding: "1rem 1.5rem",
+  outline: "none",
+  border: 0,
+  fontWeight: 600,
+  boxShadow:
+    "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
+  transition: "all 0.6s ease",
+  "&:hover": {
+    cursor: "pointer",
+    backgroundColor: "transparent",
+
+    color: "black",
+    transition: "all 0.6s ease",
   },
 });
