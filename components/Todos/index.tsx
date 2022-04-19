@@ -21,7 +21,6 @@ export const Todos: FC<{
   const [desc, setDesc] = useState("");
   const [todos, setTodos] = useState<ITodo[]>([]);
   const [todosDb] = useCollectionData<ITodo>(db.todos);
-
   const handleAddTodo = async (newTodo: ITodo) => {
     try {
       await setDoc<ITodo>(doc(db.todos), newTodo);
