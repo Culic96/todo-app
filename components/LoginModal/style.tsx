@@ -1,8 +1,10 @@
-import { relative } from "node:path/win32";
 import styled from "styled-components";
 
 export const ModalBody = styled.div({
-  position: "relative",
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: "50vw",
   height: "80vh",
   backgroundColor: "#229ED9",
