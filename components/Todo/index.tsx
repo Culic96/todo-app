@@ -41,6 +41,7 @@ const Todo: FC<{
             {isEditMode ? (
               <>
                 <EditModeInput
+                  maxLength={14}
                   value={editedTodo.heading}
                   onChange={(e) =>
                     setEditedTodo({

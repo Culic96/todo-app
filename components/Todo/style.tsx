@@ -12,7 +12,6 @@ export const TodoHeader = styled.div({
 });
 
 export const TodoDescription = styled.div({
-  padding: "0.5rem",
   p: {
     color: "black",
   },
@@ -83,7 +82,7 @@ export const TodoEditDelete = styled.div<{ isOpen: boolean }>(
 export const TodoHeading = styled.h3({
   color: "black",
   fontWeight: 300,
-  fontSize: "1.5rem",
+  fontSize: "1.3rem",
   margin: 0,
 });
 
