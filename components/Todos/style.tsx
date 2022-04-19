@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
 export const TodoHolder = styled.div({
-  height: "100%",
+  height: "100vh",
   width: "100vw",
   display: "flex",
+  justifyContent: "flex-start",
+  alignItems: "flex-start",
   marginTop: "5rem",
 });
 
@@ -13,7 +15,7 @@ export const TodoAddDiv = styled.div({
   borderRight: "2px solid black",
   display: "flex",
   flexDirection: "column",
-  justifyContent: "center",
+  justifyContent: "flex-start",
   alignItems: "center",
 });
 
@@ -45,7 +47,7 @@ export const GridWrapper = styled.div({
   height: "100%",
   display: "flex",
   justifyContent: "center",
-  alignItems: "center",
+  alignItems: "flex-start",
   flexDirection: "row",
 });
 
@@ -54,7 +56,7 @@ export const TodoAdd = styled.div({
   height: "200px",
   backgroundColor: "#white",
   textAlign: "center",
-  margin: "0 auto",
+  // margin: "0 auto",
   overflow: "hidden",
   color: "#22333B",
   boxShadow:
