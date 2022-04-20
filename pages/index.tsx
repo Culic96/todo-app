@@ -38,7 +38,6 @@ const Home: NextPage = () => {
   return (
     <PageWrapper>
       <Header />
-
       {!auth && (
         <>
           <SignInUp
