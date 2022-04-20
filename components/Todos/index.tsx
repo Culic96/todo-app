@@ -10,15 +10,13 @@ import {
 import { db, ITodo } from "../../firebaseFunctions/firestore";
 import { addDoc, doc, setDoc } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import { deleteDoc, getDoc } from "firebase/firestore";
+import { deleteDoc } from "firebase/firestore";
 import Todo from "../Todo";
-
 export const Todos: FC<{
   existingTodo?: (ITodo & { id: string }) | null;
 }> = () => {
   const [todos, setTodos] = useState<ITodo[]>([]);
   const [todosDb] = useCollectionData<ITodo>(db.todos);
-  const [canAddTodo, setCanAddTodo] = useState(true);
   // const handleAddTodo = async (newTodo: ITodo) => {
   //   try {
   //     await setDoc<ITodo>(doc(db.todos), newTodo);
@@ -40,6 +38,17 @@ export const Todos: FC<{
     }
   };
 
+  const todoEditCancel = (todo: ITodo) => {
+    if (todo.id) {
+      console.log("Cancel fired from id");
+      return todo;
+    } else if (!todo.id) {
+      console.log("Cancel fired instantly");
+
+      setTodos(todos.slice(1));
+    }
+  };
+
   const addOrEditTodo = async (todo: ITodo) => {
     if (todo.id) {
       setDoc(
@@ -55,7 +64,6 @@ export const Todos: FC<{
       console.log("This is new todo that we made!", docRef);
       // Case where we create new todo
     }
-    setCanAddTodo(true);
   };
 
   const addNewTodo = () => {
@@ -66,7 +74,6 @@ export const Todos: FC<{
       },
       ...todos,
     ]);
-    setCanAddTodo(false);
   };
 
   useEffect(() => {
@@ -79,9 +86,7 @@ export const Todos: FC<{
     <>
       <Sidebar>
         <TodoAddDiv>
-          <AddTodoBtn isOpen={canAddTodo} onClick={addNewTodo}>
-            Add a new Todo
-          </AddTodoBtn>
+          <AddTodoBtn onClick={addNewTodo}>Add a new Todo</AddTodoBtn>
         </TodoAddDiv>
       </Sidebar>
       <GridWrapper>
@@ -94,12 +99,7 @@ export const Todos: FC<{
                   todo={todo}
                   deleteTodo={deleteTodo}
                   addOrEditTodo={addOrEditTodo}
-                  todoEditCancel={(todo: ITodo) => {
-                    if (todo.id) {
-                      return todo;
-                    }
-                    setTodos(todos.slice(1));
-                  }}
+                  todoEditCancel={todoEditCancel}
                 />
               );
             })}

@@ -11,8 +11,7 @@ import Header from "../components/Header";
 export const Container = styled.div({
   display: "flex",
   flexDirection: "row",
-  height: "100vh",
-  width: "100vw",
+  gap: "2rem",
   margin: 0,
   padding: 0,
 });
@@ -23,6 +22,7 @@ export const PageWrapper = styled.div({
   height: "100vh",
   width: "100vw",
   boxSizing: "border-box",
+  overflow: "visible",
 });
 
 const Home: NextPage = () => {
@@ -37,15 +37,20 @@ const Home: NextPage = () => {
   return (
     <PageWrapper>
       <Header />
-      <Container>
-        {!auth && (
+
+      {!auth && (
+        <>
           <SignInUp
             onSignInClick={() => setLoginModalOpen(true)}
             onSignUpClick={() => setSignUpModalOpen(true)}
           />
-        )}
-        <Todos />
-      </Container>
+        </>
+      )}
+      {auth && (
+        <Container>
+          <Todos />
+        </Container>
+      )}
       <SignUpModal
         isModalOpen={signUpModalOpen}
         onClose={() => setSignUpModalOpen(false)}

@@ -23,6 +23,7 @@ const Todo: FC<{
   todo: ITodo;
   deleteTodo: (id: string | undefined) => void;
   addOrEditTodo: (todo: ITodo) => void;
+
   todoEditCancel: (todo: ITodo) => void;
 }> = ({ todo, deleteTodo, addOrEditTodo, todoEditCancel }) => {
   const [isEditOpen, setIsEditOpen] = useState(false);
