@@ -17,6 +17,7 @@ export const Todos: FC<{
 }> = () => {
   const [todos, setTodos] = useState<ITodo[]>([]);
   const [todosDb] = useCollectionData<ITodo>(db.todos);
+  const [isOpen, setIsOpen] = useState(true);
   // const handleAddTodo = async (newTodo: ITodo) => {
   //   try {
   //     await setDoc<ITodo>(doc(db.todos), newTodo);
@@ -38,15 +39,10 @@ export const Todos: FC<{
     }
   };
 
-  const todoEditCancel = (todo: ITodo) => {
-    if (todo.id) {
-      console.log("Cancel fired from id");
-      return todo;
-    } else if (!todo.id) {
-      console.log("Cancel fired instantly");
-
-      setTodos(todos.slice(1));
-    }
+  const todoAddNewCancel = (todo: ITodo) => {
+    console.log("Cancel fired instantly");
+    setIsOpen(true);
+    setTodos(todos.slice(1));
   };
 
   const addOrEditTodo = async (todo: ITodo) => {
@@ -64,6 +60,7 @@ export const Todos: FC<{
       console.log("This is new todo that we made!", docRef);
       // Case where we create new todo
     }
+    setIsOpen(true);
   };
 
   const addNewTodo = () => {
@@ -74,6 +71,7 @@ export const Todos: FC<{
       },
       ...todos,
     ]);
+    setIsOpen(false);
   };
 
   useEffect(() => {
@@ -86,7 +84,9 @@ export const Todos: FC<{
     <>
       <Sidebar>
         <TodoAddDiv>
-          <AddTodoBtn onClick={addNewTodo}>Add a new Todo</AddTodoBtn>
+          {isOpen && (
+            <AddTodoBtn onClick={addNewTodo}>Add a new Todo</AddTodoBtn>
+          )}
         </TodoAddDiv>
       </Sidebar>
       <GridWrapper>
@@ -99,7 +99,7 @@ export const Todos: FC<{
                   todo={todo}
                   deleteTodo={deleteTodo}
                   addOrEditTodo={addOrEditTodo}
-                  todoEditCancel={todoEditCancel}
+                  todoAddNewCancel={todoAddNewCancel}
                 />
               );
             })}

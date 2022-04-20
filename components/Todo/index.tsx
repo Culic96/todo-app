@@ -23,9 +23,8 @@ const Todo: FC<{
   todo: ITodo;
   deleteTodo: (id: string | undefined) => void;
   addOrEditTodo: (todo: ITodo) => void;
-
-  todoEditCancel: (todo: ITodo) => void;
-}> = ({ todo, deleteTodo, addOrEditTodo, todoEditCancel }) => {
+  todoAddNewCancel: (todo: ITodo) => void;
+}> = ({ todo, deleteTodo, addOrEditTodo, todoAddNewCancel }) => {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(!todo.id);
   const [editedTodo, setEditedTodo] = useState<ITodo>(todo);
@@ -81,8 +80,11 @@ const Todo: FC<{
                     onClick={() => {
                       setIsEditMode(false);
                       setEditedTodo(todo);
-                      if (todo.id) {
-                        todoEditCancel(todo);
+
+                      // We're working on a new todo
+                      // cancel will remove it from the state
+                      if (!todo.id) {
+                        todoAddNewCancel(todo);
                       }
                     }}
                     icon={faTimes}
