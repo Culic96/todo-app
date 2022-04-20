@@ -105,6 +105,11 @@ const Todo: FC<{
 
             <TodoEditDelete isOpen={isEditOpen}>
               <div
+                onClick={() => {
+                  setIsEditOpen(!isEditOpen);
+                  setIsEditMode(true);
+                  addOrEditTodo(editedTodo);
+                }}
                 style={{
                   display: "flex",
                   flexDirection: "row",
@@ -115,17 +120,11 @@ const Todo: FC<{
               >
                 <p>Edit</p>
                 <p style={{ marginLeft: "0.5rem" }}>
-                  <FontAwesomeIcon
-                    icon={faEdit}
-                    onClick={() => {
-                      setIsEditOpen(!isEditOpen);
-                      setIsEditMode(true);
-                      addOrEditTodo(editedTodo);
-                    }}
-                  />
+                  <FontAwesomeIcon icon={faEdit} />
                 </p>
               </div>
               <div
+                onClick={() => deleteTodo(editedTodo.id)}
                 style={{
                   display: "flex",
                   flexDirection: "row",
@@ -136,10 +135,7 @@ const Todo: FC<{
               >
                 <p>Delete</p>
                 <p style={{ marginLeft: "0.5rem" }}>
-                  <FontAwesomeIcon
-                    onClick={() => deleteTodo(editedTodo.id)}
-                    icon={faDeleteLeft}
-                  />
+                  <FontAwesomeIcon icon={faDeleteLeft} />
                 </p>
               </div>
             </TodoEditDelete>

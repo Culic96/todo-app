@@ -30,7 +30,6 @@ export const TodoAdded = styled.div({
   boxShadow:
     "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
   marginTop: "5rem",
-
   p: {
     margin: 0,
     fontWeight: 400,
@@ -45,6 +44,7 @@ export const TodoContainer = styled.div({
   justifyContent: "space-around",
   alignItems: "flex-start",
   textAlign: "center",
+  zIndex: 1,
   "& > div:first-child": {
     flex: 1,
   },
