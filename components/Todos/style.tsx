@@ -37,7 +37,7 @@ export const ScrollContainer = styled.div({
   display: "flex",
   justifyContent: "center",
   // alignItems: "center",
-  overflowY: "scroll",
+  overflowY: "visible",
 });
 
 export const GridWrapper = styled.div({
@@ -55,7 +55,7 @@ export const TodoAdd = styled.div({
   backgroundColor: "#white",
   textAlign: "center",
   // margin: "0 auto",
-  overflow: "hidden",
+  // overflow: "hidden",
   color: "#22333B",
   boxShadow:
     "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
@@ -113,32 +113,22 @@ export const TodoAdd = styled.div({
   },
 });
 
-export const AddTodoBtn = styled.button<{ isOpen: boolean }>(
-  {
-    fontFamily: "inherit",
-    fontSize: "1rem",
-    color: "#fff",
-    backgroundColor: "#229ED9",
-    padding: "1rem 1.5rem",
-    outline: "none",
-    border: 0,
-    display: "none",
-    fontWeight: 600,
-    boxShadow:
-      "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
+export const AddTodoBtn = styled.button({
+  fontFamily: "inherit",
+  fontSize: "1rem",
+  color: "#fff",
+  backgroundColor: "#229ED9",
+  padding: "1rem 1.5rem",
+  outline: "none",
+  border: 0,
+  fontWeight: 600,
+  boxShadow:
+    "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
+  transition: "all 0.6s ease",
+  "&:hover": {
+    cursor: "pointer",
+    backgroundColor: "transparent",
+    color: "black",
     transition: "all 0.6s ease",
-    "&:hover": {
-      cursor: "pointer",
-      backgroundColor: "transparent",
-
-      color: "black",
-      transition: "all 0.6s ease",
-    },
   },
-  ({ isOpen }) => ({
-    ...(isOpen && {
-      opacity: 1,
-      display: "flex",
-    }),
-  })
-);
+});
