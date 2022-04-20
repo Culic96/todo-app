@@ -10,6 +10,8 @@ import Header from "../components/Header";
 
 export const Container = styled.div({
   display: "flex",
+  height: "100vh",
+  width: "100vw",
   flexDirection: "row",
   gap: "2rem",
   margin: 0,
@@ -19,10 +21,9 @@ export const Container = styled.div({
 export const PageWrapper = styled.div({
   display: "flex",
   flexDirection: "column",
-  height: "100vh",
+  height: "92vh",
   width: "100vw",
   boxSizing: "border-box",
-  overflow: "visible",
 });
 
 const Home: NextPage = () => {
