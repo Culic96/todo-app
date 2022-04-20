@@ -72,7 +72,7 @@ const Todo: FC<{
                       cursor: "pointer",
                     }}
                     onClick={() => {
-                      setIsEditMode(!isEditMode);
+                      setIsEditMode(false);
                       addOrEditTodo(editedTodo);
                     }}
                   />
@@ -80,7 +80,9 @@ const Todo: FC<{
                     onClick={() => {
                       setIsEditMode(false);
                       setEditedTodo(todo);
-                      todoEditCancel(todo);
+                      if (todo.id) {
+                        todoEditCancel(todo);
+                      }
                     }}
                     icon={faTimes}
                     color="red"
@@ -113,8 +115,9 @@ const Todo: FC<{
                   <FontAwesomeIcon
                     icon={faEdit}
                     onClick={() => {
-                      addOrEditTodo(editedTodo);
+                      setIsEditOpen(!isEditOpen);
                       setIsEditMode(true);
+                      addOrEditTodo(editedTodo);
                     }}
                   />
                 </p>

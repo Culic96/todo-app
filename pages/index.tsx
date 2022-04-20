@@ -7,11 +7,22 @@ import LoginModal from "../components/LoginModal";
 import { useEffect, useState } from "react";
 import { useAuth } from "../Hooks/useAuth";
 import Header from "../components/Header";
+
 export const Container = styled.div({
-  height: "100%",
+  display: "flex",
+  flexDirection: "row",
+  height: "100vh",
   width: "100vw",
   margin: 0,
   padding: 0,
+});
+
+export const PageWrapper = styled.div({
+  display: "flex",
+  flexDirection: "column",
+  height: "100vh",
+  width: "100vw",
+  boxSizing: "border-box",
 });
 
 const Home: NextPage = () => {
@@ -24,7 +35,7 @@ const Home: NextPage = () => {
   }, []);
 
   return (
-    <div>
+    <PageWrapper>
       <Header />
       <Container>
         {!auth && (
@@ -43,7 +54,7 @@ const Home: NextPage = () => {
         isModalOpen={loginModalOpen}
         onClose={() => setLoginModalOpen(false)}
       />
-    </div>
+    </PageWrapper>
   );
 };
 

@@ -1,22 +1,17 @@
 import styled from "styled-components";
 
-export const TodoHolder = styled.div({
-  height: "100vh",
-  width: "100vw",
-  display: "flex",
-  justifyContent: "flex-start",
-  alignItems: "flex-start",
-  marginTop: "5rem",
+export const Sidebar = styled.div({
+  width: "25vw",
+  height: "100%",
+  borderRight: "4px solid #229ED9",
 });
 
 export const TodoAddDiv = styled.div({
-  width: "25vw",
-  height: "100%",
-  borderRight: "2px solid black",
   display: "flex",
   flexDirection: "column",
   justifyContent: "flex-start",
   alignItems: "center",
+  marginTop: "5rem",
 });
 
 export const TodoCardHolder = styled.div({
@@ -26,6 +21,8 @@ export const TodoCardHolder = styled.div({
   gridAutoFlow: "row",
   columnGap: "30px",
   rowGap: "30px",
+  alignItems: "top",
+  alignContent: "top",
   div: {
     width: "100%",
     height: "100%",
@@ -39,7 +36,8 @@ export const ScrollContainer = styled.div({
   margin: "0 auto",
   display: "flex",
   justifyContent: "center",
-  alignItems: "center",
+  // alignItems: "center",
+  overflowY: "scroll",
 });
 
 export const GridWrapper = styled.div({
@@ -115,23 +113,32 @@ export const TodoAdd = styled.div({
   },
 });
 
-export const AddTodoBtn = styled.button({
-  fontFamily: "inherit",
-  fontSize: "1rem",
-  color: "#fff",
-  backgroundColor: "#229ED9",
-  padding: "1rem 1.5rem",
-  outline: "none",
-  border: 0,
-  fontWeight: 600,
-  boxShadow:
-    "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
-  transition: "all 0.6s ease",
-  "&:hover": {
-    cursor: "pointer",
-    backgroundColor: "transparent",
-
-    color: "black",
+export const AddTodoBtn = styled.button<{ isOpen: boolean }>(
+  {
+    fontFamily: "inherit",
+    fontSize: "1rem",
+    color: "#fff",
+    backgroundColor: "#229ED9",
+    padding: "1rem 1.5rem",
+    outline: "none",
+    border: 0,
+    display: "none",
+    fontWeight: 600,
+    boxShadow:
+      "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
     transition: "all 0.6s ease",
+    "&:hover": {
+      cursor: "pointer",
+      backgroundColor: "transparent",
+
+      color: "black",
+      transition: "all 0.6s ease",
+    },
   },
-});
+  ({ isOpen }) => ({
+    ...(isOpen && {
+      opacity: 1,
+      display: "flex",
+    }),
+  })
+);
