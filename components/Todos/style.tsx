@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Sidebar = styled.div({
   width: "25vw",
   height: "100%",
+  display: "flex",
   borderRight: "4px solid #229ED9",
 });
 
@@ -11,6 +12,8 @@ export const TodoAddDiv = styled.div({
   flexDirection: "column",
   justifyContent: "flex-start",
   alignItems: "center",
+  position: "fixed",
+  left: "10px",
   marginTop: "5rem",
 });
 
@@ -23,6 +26,8 @@ export const TodoCardHolder = styled.div({
   rowGap: "30px",
   alignItems: "top",
   alignContent: "top",
+  marginBottom: "10rem",
+
   div: {
     width: "100%",
     height: "100%",
@@ -36,14 +41,16 @@ export const ScrollContainer = styled.div({
   margin: "0 auto",
   display: "flex",
   justifyContent: "center",
+
   // alignItems: "center",
-  overflowY: "visible",
+  overflowY: "scroll",
 });
 
 export const GridWrapper = styled.div({
-  width: "100%",
-  height: "100%",
+  width: "100vw",
+  height: "100vh",
   display: "flex",
+  marginBottom: "2rem",
   justifyContent: "center",
   alignItems: "flex-start",
   flexDirection: "row",
