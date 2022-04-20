@@ -1,12 +1,11 @@
 import { FC, useEffect, useState } from "react";
 import {
-  TodoHolder,
   ScrollContainer,
   GridWrapper,
   TodoCardHolder,
   TodoAddDiv,
-  TodoAdd,
   AddTodoBtn,
+  Sidebar,
 } from "./style";
 import { db, ITodo } from "../../firebaseFunctions/firestore";
 import { addDoc, doc, setDoc } from "firebase/firestore";
@@ -19,6 +18,7 @@ export const Todos: FC<{
 }> = () => {
   const [todos, setTodos] = useState<ITodo[]>([]);
   const [todosDb] = useCollectionData<ITodo>(db.todos);
+  const [canAddTodo, setCanAddTodo] = useState(true);
   // const handleAddTodo = async (newTodo: ITodo) => {
   //   try {
   //     await setDoc<ITodo>(doc(db.todos), newTodo);
@@ -52,9 +52,10 @@ export const Todos: FC<{
       );
     } else {
       const docRef = await addDoc(db.todos, todo);
-      console.log(docRef);
+      console.log("This is new todo that we made!", docRef);
       // Case where we create new todo
     }
+    setCanAddTodo(true);
   };
 
   const addNewTodo = () => {
@@ -65,6 +66,7 @@ export const Todos: FC<{
       },
       ...todos,
     ]);
+    setCanAddTodo(false);
   };
 
   useEffect(() => {
@@ -75,30 +77,35 @@ export const Todos: FC<{
 
   return (
     <>
-      <TodoHolder>
+      <Sidebar>
         <TodoAddDiv>
-          <AddTodoBtn onClick={addNewTodo}>Add a new Todo</AddTodoBtn>
+          <AddTodoBtn isOpen={canAddTodo} onClick={addNewTodo}>
+            Add a new Todo
+          </AddTodoBtn>
         </TodoAddDiv>
-        <GridWrapper>
-          <ScrollContainer>
-            <TodoCardHolder>
-              {todos?.map((todo, index) => {
-                return (
-                  <Todo
-                    key={todo.id || index}
-                    todo={todo}
-                    deleteTodo={deleteTodo}
-                    addOrEditTodo={addOrEditTodo}
-                    todoEditCancel={() => {
-                      setTodos(todos.slice(1));
-                    }}
-                  />
-                );
-              })}
-            </TodoCardHolder>
-          </ScrollContainer>
-        </GridWrapper>
-      </TodoHolder>
+      </Sidebar>
+      <GridWrapper>
+        <ScrollContainer>
+          <TodoCardHolder>
+            {todos?.map((todo, index) => {
+              return (
+                <Todo
+                  key={todo.id || index}
+                  todo={todo}
+                  deleteTodo={deleteTodo}
+                  addOrEditTodo={addOrEditTodo}
+                  todoEditCancel={(todo: ITodo) => {
+                    if (todo.id) {
+                      return todo;
+                    }
+                    setTodos(todos.slice(1));
+                  }}
+                />
+              );
+            })}
+          </TodoCardHolder>
+        </ScrollContainer>
+      </GridWrapper>
     </>
   );
 };
