@@ -14,7 +14,7 @@ import {
   UserMenuList,
 } from "./style";
 import { db, IProfile } from "../../firebaseFunctions/firestore";
-import { doc, setDoc, getDoc, addDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 const Header = () => {
   const { auth, logoutUser } = useAuth();
@@ -43,18 +43,7 @@ const Header = () => {
     }
   }, [userDoc]);
 
-  // const handleForm = (e:FormEvent) => {
-  //   e.preventDefault();
-  //   try {
 
-
-  //   } catch (error) {
-  //     console.log(error?.message)
-  //   }
-  // }
-  // const createUserProfile = async () => {
-  //   const docRef = await addDoc(db.profile, userProfile);
-  // }
   const onCancel = () => {
     setUserProfileEdit(userProfile);
   }
@@ -73,11 +62,7 @@ const Header = () => {
       );
     }
   }
-
-  useEffect(() => {
-    console.log("fired")
-  }, [])
-
+  console.log(isUserMenuOpened);
   return (
     <>
       <HeaderContainer>
@@ -138,7 +123,10 @@ const Header = () => {
                 </>
               }
 
-              <button onClick={logoutUser}>Logout</button>
+              <button onClick={() => {
+                logoutUser();
+                setIsUserMenuOpened(!isUserMenuOpened);
+              }}>Logout</button>
             </UserMenuList>
           </UserInfo>
         )}

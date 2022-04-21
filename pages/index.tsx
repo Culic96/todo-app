@@ -7,6 +7,7 @@ import LoginModal from "../components/LoginModal";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../Hooks/useAuth";
 import Header from "../components/Header";
+import Loader from "../components/Loader";
 export const Container = styled.div({
   display: "flex",
   height: "100vh",
@@ -29,16 +30,19 @@ const Home: NextPage = () => {
   const [signUpModalOpen, setSignUpModalOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const { auth } = useAuth();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     console.log("Page HOME did mount");
-
-  }, []);
+    setLoading(false);
+  }, [auth]);
 
   return (
     <PageWrapper>
       <Header />
-      
+      {loading &&
+        <Loader />
+      }
       {!auth && (
         <>
           <SignInUp
