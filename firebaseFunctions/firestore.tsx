@@ -6,6 +6,13 @@ export interface ITodo {
   desc: string;
 }
 
+export interface IProfile {
+  id?: string,
+  username: string,
+  organization: string,
+  age: string
+}
+
 const converter = <T,>() => ({
   toFirestore: (data: T) => data,
   fromFirestore: (snap: QueryDocumentSnapshot) => {
@@ -18,4 +25,5 @@ const dataPoint = <T,>(collectionPath: string) =>
 
 export const db = {
   todos: dataPoint<ITodo>("todos"),
+  profiles: dataPoint<IProfile>("profiles"),
 };

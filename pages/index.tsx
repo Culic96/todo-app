@@ -4,10 +4,9 @@ import styled from "styled-components";
 import Todos from "../components/Todos";
 import SignUpModal from "../components/SignUpModal";
 import LoginModal from "../components/LoginModal";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../Hooks/useAuth";
 import Header from "../components/Header";
-
 export const Container = styled.div({
   display: "flex",
   height: "100vh",
@@ -33,11 +32,13 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     console.log("Page HOME did mount");
+
   }, []);
 
   return (
     <PageWrapper>
       <Header />
+      
       {!auth && (
         <>
           <SignInUp

@@ -5,10 +5,12 @@ import {
   FormControl,
   SignUpButton,
   ExitButton,
+  LoaderDiv,
 } from "./style";
 import { resetPassword } from "../../firebaseFunctions/index";
-import React, { FC, FormEvent, useState } from "react";
+import React, { FC, FormEvent, useEffect, useState } from "react";
 import { loginUser } from "../../firebaseFunctions/index";
+import Loader from "../Loader";
 
 const LoginModal: FC<{ isModalOpen: boolean; onClose: () => void }> = ({
   isModalOpen,
@@ -18,16 +20,14 @@ const LoginModal: FC<{ isModalOpen: boolean; onClose: () => void }> = ({
   const labelText: string = "Enter your password";
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
     try {
       await loginUser(username, password);
       setUsername("");
       setPassword("");
-      alert(`Succesfully Logged In! as ${username}`);
       onClose();
     } catch (error: any) {
       alert(error.message);
@@ -36,19 +36,22 @@ const LoginModal: FC<{ isModalOpen: boolean; onClose: () => void }> = ({
 
   async function handleSendResetPasswordEmail() {
     if (!username) {
-      alert("Missing username!");
-      return;
+      return alert("Missing username!");
     }
     try {
       await resetPassword(username);
       alert("Send the password reset!");
     } catch (error: any) {
-      alert(error.message);
+      alert(error?.message);
     }
   }
 
+
+
+
   return (
     <>
+
       {isModalOpen && (
         <ModalBody>
           <h1>Login Please</h1>
@@ -115,6 +118,11 @@ const LoginModal: FC<{ isModalOpen: boolean; onClose: () => void }> = ({
               >
                 Reset Password
               </SignUpButton>
+              <LoaderDiv>
+                {loading &&
+                  <Loader />
+                }
+              </LoaderDiv>
             </LoginForm>
           </FormHolder>
         </ModalBody>

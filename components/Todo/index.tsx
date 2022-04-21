@@ -29,9 +29,7 @@ const Todo: FC<{
   const [isEditMode, setIsEditMode] = useState(!todo.id);
   const [editedTodo, setEditedTodo] = useState<ITodo>(todo);
 
-  useEffect(() => {
-    console.log(`[ToDo] id = ${editedTodo.id}`);
-  }, []);
+  
 
   return (
     <>

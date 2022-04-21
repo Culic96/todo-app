@@ -50,7 +50,7 @@ export const LoaderBody = styled.div({
     animationDelay: "1s",
   },
   "@keyframes Loading": {
-    "0%": { opacity: 0, transform: "translateY(-20px)" },
-    "100%": { opacity: 1, transform: "translateY(20px)" },
+    "0%": { opacity: 0, transform: "translateY(-20px) " },
+    "100%": { opacity: 1, transform: "translateY(10px)" },
   },
 });

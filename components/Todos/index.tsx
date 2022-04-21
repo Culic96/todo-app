@@ -33,14 +33,14 @@ export const Todos: FC<{
   }, []);
 
   const deleteTodo = async (id: string | undefined) => {
-    if (id) {
-      await deleteDoc(doc(db.todos, id));
-      setTodos(todos.filter((todo) => todo.id !== id));
-    }
+    if (!id) return;
+    
+    await deleteDoc(doc(db.todos, id));
+    setTodos(todos.filter((todo) => todo.id !== id));
+    
   };
 
   const todoAddNewCancel = (todo: ITodo) => {
-    console.log("Cancel fired instantly");
     setIsOpen(true);
     setTodos(todos.slice(1));
   };
@@ -57,7 +57,6 @@ export const Todos: FC<{
       );
     } else {
       const docRef = await addDoc(db.todos, todo);
-      console.log("This is new todo that we made!", docRef);
       // Case where we create new todo
     }
     setIsOpen(true);

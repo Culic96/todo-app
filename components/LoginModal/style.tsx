@@ -130,3 +130,10 @@ export const SignUpButton = styled.button({
     transition: "all 0.5s ease",
   },
 });
+
+export const LoaderDiv = styled.div({
+  position: 'relative',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+})
