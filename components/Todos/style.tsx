@@ -130,7 +130,7 @@ export const AddTodoBtn = styled.button({
   transition: "all 0.6s ease",
   "&:hover": {
     cursor: "pointer",
-    backgroundColor: "transparent",
+    backgroundColor: "#f2f2f2",
     color: "black",
     transition: "all 0.6s ease",
   },

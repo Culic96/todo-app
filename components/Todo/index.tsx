@@ -111,6 +111,7 @@ const Todo: FC<{
                   setIsEditOpen(!isEditOpen);
                 }}
                 icon={faEllipsisVertical}
+
                 style={{ color: "black", cursor: "pointer", padding: "0.5rem" }}
               />
             )}

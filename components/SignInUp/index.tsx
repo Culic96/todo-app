@@ -9,7 +9,7 @@ const SignInUp: FC<{
     <>
       <div
         style={{
-          height: "92vh",
+          height: "100vh",
           width: "100vw",
           margin: 0,
           padding: 0,

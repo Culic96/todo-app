@@ -54,7 +54,7 @@ const Header = () => {
     console.log('[onEditProfile] profile id = ', userProfile.id);
     if (auth) {
       await setDoc(
-        doc(db.profiles, auth?.userId),
+        doc(db.profiles, auth.userId),
         {
           username: userProfile.username,
           organization: userProfile.organization,
@@ -64,7 +64,6 @@ const Header = () => {
       );
     }
   }
-
   const { theme, setTheme } = useContext(ThemeContext);
 
   const themeToogle = () => {
