@@ -1,7 +1,6 @@
-import { FC } from "react";
 import { LoaderBody, LoaderContainer } from "./style";
 
-const Loader: FC<{isOpen: boolean}> = ({isOpen}) => {
+const Loader = () => {
   return (
     <>
       <LoaderContainer>

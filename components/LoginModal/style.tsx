@@ -80,6 +80,7 @@ export const FormControl = styled.div({
     position: "absolute",
     top: -3,
   },
+
   input: {
     fontSize: "120%",
     display: "block",

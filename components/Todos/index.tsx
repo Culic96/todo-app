@@ -34,10 +34,10 @@ export const Todos: FC<{
 
   const deleteTodo = async (id: string | undefined) => {
     if (!id) return;
-    
+
     await deleteDoc(doc(db.todos, id));
     setTodos(todos.filter((todo) => todo.id !== id));
-    
+
   };
 
   const todoAddNewCancel = (todo: ITodo) => {

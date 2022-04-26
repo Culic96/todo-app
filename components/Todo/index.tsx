@@ -6,7 +6,7 @@ import {
   faCheck,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { ITodo } from "../../firebaseFunctions/firestore";
 import {
   TodoAdded,
@@ -29,7 +29,7 @@ const Todo: FC<{
   const [isEditMode, setIsEditMode] = useState(!todo.id);
   const [editedTodo, setEditedTodo] = useState<ITodo>(todo);
 
-  
+
 
   return (
     <>

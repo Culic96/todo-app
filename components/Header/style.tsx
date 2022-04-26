@@ -103,6 +103,7 @@ export const UserMenuList = styled.div<{ isOpened: boolean }>(
     backgroundColor: "#FFF",
     transition: "all 0.6s ease",
     userSelect: "none",
+    gap: '1rem',
     p: {
       marginLeft: "12px",
       fontSize: "0.9rem",

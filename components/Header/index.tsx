@@ -4,7 +4,7 @@ import {
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { FormEvent, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useAuth } from "../../Hooks/useAuth";
 import {
   HeaderContainer,
@@ -16,6 +16,8 @@ import {
 import { db, IProfile } from "../../firebaseFunctions/firestore";
 import { doc, setDoc } from "firebase/firestore";
 import { useDocumentData } from "react-firebase-hooks/firestore";
+import { ThemeContext } from "../../pages/_app";
+import { AppTheme } from "../../Theme/AppTheme";
 const Header = () => {
   const { auth, logoutUser } = useAuth();
   const [isUserMenuOpened, setIsUserMenuOpened] = useState(false);
@@ -62,19 +64,36 @@ const Header = () => {
       );
     }
   }
-  console.log(isUserMenuOpened);
+
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  const themeToogle = () => {
+    setTheme(theme === "light" ? "dark" : "light")
+  }
+
+  const headerStyle: AppTheme = {
+    dark: { backgroundColor: '#333', color: "#f2f2f2" },
+    light: { backgroundColor: '#f2f2f2', color: '#333' },
+    common: { transition: 'all 1s ease' }
+  }
+
+  const themeStyle = {
+    ...headerStyle.common,
+    ...(theme === 'light' ? headerStyle.light : headerStyle.dark)
+  }
+
   return (
     <>
-      <HeaderContainer>
-        <HeaderLogo>
-          <h1>
-            <span>TODO</span>app
+      <HeaderContainer style={themeStyle}>
+        <HeaderLogo style={themeStyle}>
+          <h1 style={{ color: "#229ED9" }}>
+            <span>TODO </span>app
           </h1>
         </HeaderLogo>
         {auth && (
-          <UserInfo>
-            <UserMenu onClick={() => setIsUserMenuOpened(!isUserMenuOpened)} />
-            <UserMenuList isOpened={isUserMenuOpened}>
+          <UserInfo style={themeStyle}>
+            <UserMenu style={themeStyle} onClick={() => setIsUserMenuOpened(!isUserMenuOpened)} />
+            <UserMenuList style={themeStyle} isOpened={isUserMenuOpened}>
               <button onClick={() => setOpenForm(true)}>Profile</button>
               {!openForm &&
                 <>
@@ -85,7 +104,6 @@ const Header = () => {
               }
               {openForm &&
                 <>
-                  {/* <form onSubmit={handleForm}> */}
                   <p>Username:
                   <input
                       type="text"
@@ -118,11 +136,9 @@ const Header = () => {
                         onCancel();
                       }} />
                   </div>
-
-                  {/* </form> */}
                 </>
               }
-
+              <button onClick={() => themeToogle()}>Theme</button>
               <button onClick={() => {
                 logoutUser();
                 setIsUserMenuOpened(!isUserMenuOpened);
@@ -136,3 +152,5 @@ const Header = () => {
 };
 
 export default Header;
+
+

@@ -1,9 +1,5 @@
 import { SignUpButton } from "./style";
-import { FC, useState } from "react";
-import SignUpModal from "../SignUpModal";
-import LoginModal from "../LoginModal";
-import Header from "../Header";
-import { useAuth } from "../../Hooks/useAuth";
+import { FC } from "react";
 
 const SignInUp: FC<{
   onSignUpClick: () => void;

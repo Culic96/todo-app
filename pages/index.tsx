@@ -4,10 +4,12 @@ import styled from "styled-components";
 import Todos from "../components/Todos";
 import SignUpModal from "../components/SignUpModal";
 import LoginModal from "../components/LoginModal";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useAuth } from "../Hooks/useAuth";
 import Header from "../components/Header";
 import Loader from "../components/Loader";
+import { ThemeContext } from "./_app";
+import { AppTheme } from "../Theme/AppTheme";
 export const Container = styled.div({
   display: "flex",
   height: "100vh",
@@ -31,6 +33,19 @@ const Home: NextPage = () => {
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const { auth } = useAuth();
   const [loading, setLoading] = useState(true);
+  const { theme } = useContext(ThemeContext);
+
+  const pageStyle: AppTheme = {
+    dark: { backgroundColor: '#333', color: "#f2f2f2" },
+    light: { backgroundColor: '#f2f2f2', color: '#333' },
+    common: { transition: 'all 1s ease' }
+  }
+
+  const themeStyle = {
+    ...pageStyle.common,
+    ...(theme === 'light' ? pageStyle.light : pageStyle.dark)
+  }
+
 
   useEffect(() => {
     console.log("Page HOME did mount");
@@ -38,7 +53,7 @@ const Home: NextPage = () => {
   }, [auth]);
 
   return (
-    <PageWrapper>
+    <PageWrapper style={themeStyle}>
       <Header />
       {loading &&
         <Loader />
@@ -52,7 +67,7 @@ const Home: NextPage = () => {
         </>
       )}
       {auth && (
-        <Container>
+        <Container style={themeStyle}>
           <Todos />
         </Container>
       )}
