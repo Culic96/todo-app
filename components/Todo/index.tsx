@@ -6,7 +6,7 @@ import {
   faCheck,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
-import { FC, useState } from "react";
+import { FC, useContext, useState } from "react";
 import { ITodo } from "../../firebaseFunctions/firestore";
 import {
   TodoAdded,
@@ -18,6 +18,8 @@ import {
   EditModeTextArea,
   EditModeInput,
 } from "./style";
+import { ThemeContext } from "../../pages/_app";
+import { AppTheme } from "../../Theme/AppTheme";
 
 const Todo: FC<{
   todo: ITodo;
@@ -28,14 +30,26 @@ const Todo: FC<{
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(!todo.id);
   const [editedTodo, setEditedTodo] = useState<ITodo>(todo);
+  const { theme } = useContext(ThemeContext);
 
+
+  const headerStyle: AppTheme = {
+    dark: { backgroundColor: '#333', color: "#f2f2f2" },
+    light: { backgroundColor: '#f2f2f2', color: '#333' },
+    common: { transition: 'all 1s ease' }
+  }
+
+  const themeStyle = {
+    ...headerStyle.common,
+    ...(theme === 'light' ? headerStyle.light : headerStyle.dark)
+  }
 
 
   return (
     <>
       <TodoAdded key={editedTodo.id}>
-        <TodoContainer>
-          <TodoHeader>
+        <TodoContainer >
+          <TodoHeader style={themeStyle} >
             {isEditMode ? (
               <>
                 <EditModeInput
@@ -50,7 +64,7 @@ const Todo: FC<{
                 />
               </>
             ) : (
-              <TodoHeading>{editedTodo.heading}</TodoHeading>
+              <TodoHeading style={themeStyle} > { editedTodo.heading}</TodoHeading>
             )}
             {isEditMode ? (
               <>
@@ -101,7 +115,7 @@ const Todo: FC<{
               />
             )}
 
-            <TodoEditDelete isOpen={isEditOpen}>
+            <TodoEditDelete isOpen={isEditOpen} >
               <div
                 onClick={() => {
                   setIsEditOpen(!isEditOpen);
@@ -131,14 +145,15 @@ const Todo: FC<{
                   color: "black",
                 }}
               >
-                <p>Delete</p>
-                <p style={{ marginLeft: "0.5rem" }}>
+
+                <p >Delete</p>
+                <p style={{ marginLeft: "0.5rem" }} >
                   <FontAwesomeIcon icon={faDeleteLeft} />
                 </p>
               </div>
             </TodoEditDelete>
           </TodoHeader>
-          <TodoDescription>
+          <TodoDescription style={themeStyle} >
             {isEditMode ? (
               <EditModeTextArea
                 value={editedTodo.desc}
@@ -147,7 +162,7 @@ const Todo: FC<{
                 }
               />
             ) : (
-              <p>{editedTodo.desc}</p>
+              <p style={themeStyle}>{editedTodo.desc}</p>
             )}
           </TodoDescription>
         </TodoContainer>

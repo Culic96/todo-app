@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import {
   ScrollContainer,
   GridWrapper,
@@ -18,15 +18,7 @@ export const Todos: FC<{
   const [todos, setTodos] = useState<ITodo[]>([]);
   const [todosDb] = useCollectionData<ITodo>(db.todos);
   const [isOpen, setIsOpen] = useState(true);
-  // const handleAddTodo = async (newTodo: ITodo) => {
-  //   try {
-  //     await setDoc<ITodo>(doc(db.todos), newTodo);
-  //     setTodos([...todos, newTodo]);
-  //   } catch (err: any) {
-  //     alert(err.message);
-  //     throw err;
-  //   }
-  // };
+
 
   useEffect(() => {
     console.log("[TODOS] Component did mount");
@@ -80,9 +72,9 @@ export const Todos: FC<{
   }, [todosDb]);
 
   return (
-    <>
+    < >
       <Sidebar>
-        <TodoAddDiv>
+        <TodoAddDiv >
           {isOpen && (
             <AddTodoBtn onClick={addNewTodo}>Add a new Todo</AddTodoBtn>
           )}
@@ -90,7 +82,7 @@ export const Todos: FC<{
       </Sidebar>
       <GridWrapper>
         <ScrollContainer>
-          <TodoCardHolder>
+          <TodoCardHolder >
             {todos?.map((todo, index) => {
               return (
                 <Todo

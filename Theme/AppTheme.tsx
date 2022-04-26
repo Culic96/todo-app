@@ -6,5 +6,3 @@ export interface AppTheme {
     common?: CSSProperties
 }
 
-
-
