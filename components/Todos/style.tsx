@@ -1,3 +1,4 @@
+import { maxHeaderSize } from "http";
 import styled from "styled-components";
 
 export const Sidebar = styled.div({
@@ -8,7 +9,7 @@ export const Sidebar = styled.div({
     width: '40vw'
   },
   "@media (max-width:600px)": {
-    width: '40vw'
+    width: '60vw'
   }
 });
 
@@ -154,5 +155,66 @@ export const AddTodoBtn = styled.button({
     padding: '0.5rem 0.7rem'
   }
 });
+
+export const SearchForm = styled.form({
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "right",
+  cursor: "pointer",
+  gap: '1px'
+})
+
+export const SearchInput = styled.input({
+  backgroundColor: '#229ED9',
+  outline: "none",
+  border: 0,
+  color: '#fff',
+  fontSize: '1rem',
+  marginBottom: '3rem',
+  // maxWidth: '150px',
+  width: '50px',
+  height: '40px',
+  transition: 'width 0.6s ease',
+  "&:focus": {
+    width: '150px',
+    transition: 'width 0.6s ease'
+  },
+  "&:valid": {
+    width: '150px',
+    transition: 'width 0.6s ease'
+  },
+  '@media (max-width: 950px)': {
+    fontSize: '0.8rem',
+    height: '30px',
+    "&:valid": {
+      width: '100px',
+    },
+    "&:focus": {
+      width: '100px'
+    }
+  },
+  "@media (max-width: 550px)": {
+    fontSize: '0.6rem',
+    width: '80px',
+    "&:valid": {
+      width: '80px',
+    },
+    "&:focus": {
+      width: '80px'
+    }
+  }
+})
+
+export const SearchButton = styled.button({
+  backgroundColor: '#229ED9',
+  border: 0,
+  width: '42px',
+  height: '42px',
+  cursor: 'pointer',
+  "@media (max-width: 950px)": {
+    width: '32px',
+    height: '32px'
+  }
+})
 
 

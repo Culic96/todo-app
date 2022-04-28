@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect, useState } from "react";
+import { FC, FormEvent, useEffect, useState } from "react";
 import {
   ScrollContainer,
   GridWrapper,
@@ -6,18 +6,24 @@ import {
   TodoAddDiv,
   AddTodoBtn,
   Sidebar,
+  SearchInput,
+  SearchButton,
+  SearchForm
 } from "./style";
 import { db, ITodo } from "../../firebaseFunctions/firestore";
 import { addDoc, doc, setDoc } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { deleteDoc } from "firebase/firestore";
 import Todo from "../Todo";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 export const Todos: FC<{
   existingTodo?: (ITodo & { id: string }) | null;
 }> = () => {
   const [todos, setTodos] = useState<ITodo[]>([]);
   const [todosDb] = useCollectionData<ITodo>(db.todos);
   const [isOpen, setIsOpen] = useState(true);
+  const [search, setSearch] = useState("");
 
 
   useEffect(() => {
@@ -66,15 +72,30 @@ export const Todos: FC<{
   };
 
   useEffect(() => {
-    if (todosDb) {
+    if (todosDb && !search) {
       setTodos(todosDb);
     }
-  }, [todosDb]);
+  }, [todosDb, search]);
+
+  const handleSearch = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (search) {
+      const filteredTodos: ITodo[] = todosDb && todosDb.filter((todo) => todo.desc.includes(search)) || [];
+      setTodos(filteredTodos);
+    }
+  }
 
   return (
     < >
       <Sidebar>
         <TodoAddDiv >
+          <SearchForm onSubmit={handleSearch}>
+
+            <SearchInput placeholder={"Search..."} type="text" required={true} onChange={(e) => setSearch(e.target.value)} />
+            <SearchButton type={"submit"}>
+              <FontAwesomeIcon icon={faSearch} style={{ color: '#fff' }} />
+            </SearchButton>
+          </SearchForm>
           {isOpen && (
             <AddTodoBtn onClick={addNewTodo}>Add a new Todo</AddTodoBtn>
           )}
@@ -102,3 +123,5 @@ export const Todos: FC<{
 };
 
 export default Todos;
+
+
