@@ -33,22 +33,24 @@ const Todo: FC<{
   const { theme } = useContext(ThemeContext);
 
 
-  const headerStyle: AppTheme = {
-    dark: { backgroundColor: '#333', color: "#f2f2f2" },
+  const todoStyle: AppTheme = {
+    dark: { backgroundColor: '#333', color: "#f2f2f2", boxShadow: "rgba(200, 200, 200, 0.25) 0px 2px 5px -1px, rgba(200, 200, 200, 0.3) 0px 1px 3px -1px" },
     light: { backgroundColor: '#f2f2f2', color: '#333' },
     common: { transition: 'all 1s ease' }
   }
 
+
+
   const themeStyle = {
-    ...headerStyle.common,
-    ...(theme === 'light' ? headerStyle.light : headerStyle.dark)
+    ...todoStyle.common,
+    ...(theme === 'light' ? todoStyle.light : todoStyle.dark)
   }
 
 
   return (
     <>
       <TodoAdded key={editedTodo.id}>
-        <TodoContainer >
+        <TodoContainer style={themeStyle} >
           <TodoHeader style={themeStyle} >
             {isEditMode ? (
               <>

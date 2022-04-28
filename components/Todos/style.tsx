@@ -4,6 +4,12 @@ export const Sidebar = styled.div({
   width: "25vw",
   height: "100%",
   borderRight: "4px solid #229ED9",
+  "@media (max-width: 950px)": {
+    width: '40vw'
+  },
+  "@media (max-width:600px)": {
+    width: '40vw'
+  }
 });
 
 export const TodoAddDiv = styled.div({
@@ -11,7 +17,6 @@ export const TodoAddDiv = styled.div({
   flexDirection: "column",
   justifyContent: "flex-start",
   alignItems: "center",
-
   marginTop: "5rem",
 });
 
@@ -31,6 +36,12 @@ export const TodoCardHolder = styled.div({
     height: "100%",
     color: "blue",
   },
+  "@media (max-width: 950px)": {
+    gridTemplateColumns: '200px 200px'
+  },
+  "@media (max-width:600px)": {
+    gridTemplateColumns: '200px',
+  }
 });
 
 export const ScrollContainer = styled.div({
@@ -134,4 +145,14 @@ export const AddTodoBtn = styled.button({
     color: "black",
     transition: "all 0.6s ease",
   },
+  "@media (max-width: 950px)": {
+    fontSize: '1rem',
+    padding: '0.8rem 1rem'
+  },
+  "@media (max-width: 600px)": {
+    fontSize: '0.7rem',
+    padding: '0.5rem 0.7rem'
+  }
 });
+
+

@@ -24,6 +24,12 @@ export const HeaderLogo = styled.div({
     fontSize: "2rem",
     color: "#22333B",
     fontWeight: 300,
+    "@media (max-width: 950px)": {
+      fontSize: '1.5rem'
+    },
+    "@media (max-width: 600px)": {
+      fontSize: '1rem'
+    }
   },
   span: {
     fontSize: "2rem",
@@ -33,6 +39,12 @@ export const HeaderLogo = styled.div({
     padding: "0.1rem 0.4rem",
     borderRadius: "14px",
     marginRight: "0.5rem",
+    "@media (max-width: 950px)": {
+      fontSize: '1.5rem'
+    },
+    "@media (max-width: 600px)": {
+      fontSize: '1rem'
+    }
   },
 });
 
