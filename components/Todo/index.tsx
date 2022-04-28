@@ -38,12 +38,20 @@ const Todo: FC<{
     light: { backgroundColor: '#f2f2f2', color: '#333' },
     common: { transition: 'all 1s ease' }
   }
-
-
-
   const themeStyle = {
     ...todoStyle.common,
     ...(theme === 'light' ? todoStyle.light : todoStyle.dark)
+  }
+
+  const todoLetterStyle: AppTheme = {
+    dark: { backgroundColor: '#333', color: "#f2f2f2" },
+    light: { backgroundColor: '#f2f2f2', color: '#333' },
+    common: { transition: 'all 1s ease' }
+  }
+
+  const themeLetterStyle = {
+    ...todoLetterStyle.common,
+    ...(theme === "light" ? todoLetterStyle.light : todoLetterStyle.dark)
   }
 
 
@@ -66,7 +74,7 @@ const Todo: FC<{
                 />
               </>
             ) : (
-              <TodoHeading style={themeStyle} > { editedTodo.heading}</TodoHeading>
+              <TodoHeading style={themeLetterStyle} > { editedTodo.heading}</TodoHeading>
             )}
             {isEditMode ? (
               <>
@@ -165,7 +173,7 @@ const Todo: FC<{
                 }
               />
             ) : (
-              <p style={themeStyle}>{editedTodo.desc}</p>
+              <p style={themeLetterStyle}>{editedTodo.desc}</p>
             )}
           </TodoDescription>
         </TodoContainer>
