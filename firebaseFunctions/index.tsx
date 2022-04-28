@@ -13,6 +13,7 @@ import {
 } from "firebase/auth";
 // import { connectStorageEmulator, getStorage } from "firebase/storage";
 import getConfig from "next/config";
+import { getStorage } from "firebase/storage";
 const isEmulatorEnabled = true;
 
 const { publicRuntimeConfig } = getConfig();
@@ -20,7 +21,7 @@ const { publicRuntimeConfig } = getConfig();
 const firebaseApp = initializeApp(publicRuntimeConfig.firebaseConfig);
 const auth = getAuth(firebaseApp);
 const firestore = getFirestore(firebaseApp);
-// const storage = getStorage(firebaseApp);
+const storage = getStorage(firebaseApp);
 
 const getCollection = (collectionPath: string) =>
   collection(firestore, collectionPath);
@@ -49,10 +50,13 @@ const subscribeToAuthChanges = (handleAuthChanges: any) => {
   });
 };
 
+
+
 export default firebaseApp;
 export {
   auth,
   firestore,
+  storage,
   getCollection,
   loginUser,
   registerUser,

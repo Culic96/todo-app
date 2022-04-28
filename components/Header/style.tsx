@@ -123,6 +123,8 @@ export const UserMenuList = styled.div<{ isOpened: boolean }>(
     },
     input: {
       fontSize: '0.9rem',
+      userSelect: 'none',
+
       outline: 0,
     },
   },

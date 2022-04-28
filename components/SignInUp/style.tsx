@@ -9,6 +9,7 @@ export const SignUpButton = styled.button({
   backgroundSize: "400%",
   border: "2px solid transparent",
   fontSize: "1.2rem",
+  userSelect: 'none',
   transition: "all 1s ease",
   cursor: "pointer",
   "@keyframes rotation": {

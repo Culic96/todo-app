@@ -22,7 +22,6 @@ const Header = () => {
   const { auth, logoutUser } = useAuth();
   const [isUserMenuOpened, setIsUserMenuOpened] = useState(false);
   const [openForm, setOpenForm] = useState(false);
-
   const [userProfile, setUserProfile] = useState<IProfile>({
     username: "",
     organization: "",
@@ -33,10 +32,8 @@ const Header = () => {
     organization: "",
     age: "",
   });
-
-
-
   const [userDoc] = useDocumentData<IProfile>(auth ? doc(db.profiles, auth.userId) : null);
+
 
   useEffect(() => {
     if (userDoc) {
@@ -151,5 +148,4 @@ const Header = () => {
 };
 
 export default Header;
-
 

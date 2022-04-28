@@ -9,6 +9,8 @@ export const ModalBody = styled.div({
   height: "80vh",
   backgroundColor: "#229ED9",
   marginTop: "10vh",
+  userSelect: 'none',
+
   // marginLeft: "35vw",
   borderRadius: "12px",
   textAlign: "center",
@@ -43,6 +45,7 @@ export const ExitButton = styled.button({
   backgroundColor: "#229ED9",
   color: "#f2f2f2",
   fontSize: "120%",
+  userSelect: 'none',
   ":hover": {
     transform: "scale(1.50)",
     transition: "0.5s ease",

@@ -1,4 +1,3 @@
-import { maxHeaderSize } from "http";
 import styled from "styled-components";
 
 export const Sidebar = styled.div({
@@ -53,6 +52,8 @@ export const ScrollContainer = styled.div({
   marginBotom: "2rem",
   justifyContent: "center",
   overflowY: "scroll",
+  userSelect: "none",
+
 });
 
 export const GridWrapper = styled.div({
@@ -74,6 +75,7 @@ export const TodoAdd = styled.div({
   color: "#22333B",
   boxShadow:
     "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
+
 
   button: {
     color: "#fff",
@@ -139,6 +141,7 @@ export const AddTodoBtn = styled.button({
   fontWeight: 600,
   boxShadow:
     "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
+  userSelect: "none",
   transition: "all 0.6s ease",
   "&:hover": {
     cursor: "pointer",
@@ -161,7 +164,9 @@ export const SearchForm = styled.form({
   flexDirection: "row",
   justifyContent: "right",
   cursor: "pointer",
-  gap: '1px'
+  height: '40px',
+  gap: '1px',
+  marginBottom: '3rem',
 })
 
 export const SearchInput = styled.input({
@@ -171,10 +176,13 @@ export const SearchInput = styled.input({
   color: '#fff',
   fontSize: '1rem',
   marginBottom: '3rem',
-  // maxWidth: '150px',
   width: '50px',
   height: '40px',
+  userSelect: "none",
   transition: 'width 0.6s ease',
+  "::placeholder": {
+    color: "#fff"
+  },
   "&:focus": {
     width: '150px',
     transition: 'width 0.6s ease'
@@ -194,7 +202,7 @@ export const SearchInput = styled.input({
     }
   },
   "@media (max-width: 550px)": {
-    fontSize: '0.6rem',
+    fontSize: '0.8rem',
     width: '80px',
     "&:valid": {
       width: '80px',

@@ -15,6 +15,7 @@ export const ModalBody = styled.div({
   color: "#f2f2f2",
   zIndex: 1,
   animation: "fade-in 1s ease",
+  userSelect: 'none',
   transition: "all 1s ease",
   h1: {
     paddingTop: "10px",

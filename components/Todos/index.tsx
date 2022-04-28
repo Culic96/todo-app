@@ -80,7 +80,7 @@ export const Todos: FC<{
   const handleSearch = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (search) {
-      const filteredTodos: ITodo[] = todosDb && todosDb.filter((todo) => todo.desc.includes(search)) || [];
+      const filteredTodos: ITodo[] = todosDb && todosDb.filter((todo) => todo.desc.includes(search) || todo.heading.includes(search)) || [];
       setTodos(filteredTodos);
     }
   }
@@ -93,7 +93,7 @@ export const Todos: FC<{
 
             <SearchInput placeholder={"Search..."} type="text" required={true} onChange={(e) => setSearch(e.target.value)} />
             <SearchButton type={"submit"}>
-              <FontAwesomeIcon icon={faSearch} style={{ color: '#fff' }} />
+              <FontAwesomeIcon icon={faSearch} style={{ color: '#fff', fontSize: '1.3rem' }} />
             </SearchButton>
           </SearchForm>
           {isOpen && (
