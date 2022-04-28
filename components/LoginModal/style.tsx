@@ -27,6 +27,9 @@ export const ModalBody = styled.div({
       opacity: "0",
     },
   },
+  "@media (max-width: 600px)": {
+    width: '90vw'
+  }
 });
 
 export const ExitButton = styled.button({
@@ -89,6 +92,9 @@ export const FormControl = styled.div({
     border: 0,
     borderBottom: "2px solid #229ED9",
     width: "100%",
+    "@media (max-width: 600px)": {
+      fontSize: '0.9rem'
+    }
   },
   "input:focus ": {
     color: "#fff",
