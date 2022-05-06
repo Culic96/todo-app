@@ -1,9 +1,17 @@
 import { storage } from "./index";
-import { ref, uploadBytes } from "firebase/storage"
+import { ref, uploadBytes, uploadBytesResumable } from "firebase/storage"
 import { v4 } from "uuid"
 
+const uploadFile = (file: File | undefined) => {
+    if (!file) return;
+    const storageRef = ref(storage, `/images/${v4()}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
 
-export const uploadImage = (file: File) => {
-    const imageRef = ref(storage, `images/${v4()}`);
-    uploadBytes(imageRef, file);
+    uploadTask.on("state_changed", (snapshot) => {
+        const prog = (Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+    });
+
+
 }
+
+export { uploadFile };

@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheck,
   faTimes,
+  faCog,
 } from "@fortawesome/free-solid-svg-icons";
 
 import React, { useContext, useEffect, useState } from "react";
@@ -18,6 +19,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 import { ThemeContext } from "../../pages/_app";
 import { AppTheme } from "../../Theme/AppTheme";
+import Link from "next/link";
 const Header = () => {
   const { auth, logoutUser } = useAuth();
   const [isUserMenuOpened, setIsUserMenuOpened] = useState(false);
@@ -88,7 +90,9 @@ const Header = () => {
         </HeaderLogo>
         {auth && (
           <UserInfo style={themeStyle}>
-            <UserMenu style={themeStyle} onClick={() => setIsUserMenuOpened(!isUserMenuOpened)} />
+            <UserMenu style={themeStyle} onClick={() => setIsUserMenuOpened(!isUserMenuOpened)}>
+              <FontAwesomeIcon icon={faCog} style={{ fontSize: '35px' }} />
+            </UserMenu>
             <UserMenuList style={themeStyle} isOpened={isUserMenuOpened}>
               <button onClick={() => setOpenForm(true)}>Profile</button>
               {!openForm &&
@@ -139,6 +143,7 @@ const Header = () => {
                 logoutUser();
                 setIsUserMenuOpened(!isUserMenuOpened);
               }}>Logout</button>
+              <Link href="/settings">Settings</Link>
             </UserMenuList>
           </UserInfo>
         )}

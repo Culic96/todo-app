@@ -85,15 +85,20 @@ export const UserInfo = styled.div({
 
 export const UserMenu = styled.div({
   position: "relative",
+  display: 'flex',
+  justifyContent: 'center',
+  backgroundColor: 'transparent',
+  alignItems: 'center',
   width: "45px",
   height: "45px",
   borderRadius: "50%",
-  background: "url('/img/profileDefault.png')",
-  backgroundSize: "cover",
-  backgroundPosition: "center center",
-  backgroundRepeat: "no-repeat",
   cursor: "pointer",
   transition: "all 0.6s ease",
+  ":hover": {
+    backgroundColor: '#000',
+    transition: "all 0.6s ease",
+    backgroundSize: '400%'
+  }
 });
 
 export const UserMenuList = styled.div<{ isOpened: boolean }>(
