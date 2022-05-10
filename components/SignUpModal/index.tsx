@@ -1,4 +1,4 @@
-import React, { FC, FormEvent, MouseEventHandler, useEffect, useState } from "react";
+import React, { FC, FormEvent, useState } from "react";
 import {
   ModalBody,
   ExitButton,
@@ -6,10 +6,8 @@ import {
   SignUpForm,
   FormControl,
   SignUpButton,
-  LoaderDiv,
 } from "./style";
 import { registerUser } from "../../firebaseFunctions/index";
-import Loader from "../Loader";
 
 const SignUpModal: FC<{
   isModalOpen: boolean;
@@ -19,7 +17,6 @@ const SignUpModal: FC<{
   const labelText2 = "Enter your password";
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false)
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -94,15 +91,9 @@ const SignUpModal: FC<{
                 </label>
               </FormControl>
 
-              <SignUpButton disabled={loading} type="submit">Register</SignUpButton>
-              <LoaderDiv>
-                {loading &&
-                  <Loader />
-                }
-              </LoaderDiv>
+              <SignUpButton type="submit">Register</SignUpButton>
             </SignUpForm>
           </FormHolder>
-
         </ModalBody>
       )}
     </>

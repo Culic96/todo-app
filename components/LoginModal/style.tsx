@@ -86,7 +86,6 @@ export const FormControl = styled.div({
     position: "absolute",
     top: -3,
   },
-
   input: {
     fontSize: "120%",
     display: "block",
@@ -99,7 +98,7 @@ export const FormControl = styled.div({
       fontSize: '0.9rem'
     }
   },
-  "input:focus ": {
+  "input:focus": {
     color: "#fff",
     outline: "none",
     borderBottomColor: "lightblue",
@@ -107,6 +106,7 @@ export const FormControl = styled.div({
   "input:valid": {
     color: "#fff",
     outline: "none",
+
     borderBottomColor: "lightblue",
   },
   "label span": {
@@ -141,9 +141,3 @@ export const SignUpButton = styled.button({
   },
 });
 
-export const LoaderDiv = styled.div({
-  position: 'relative',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-})

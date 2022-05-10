@@ -81,6 +81,16 @@ export const UserInfo = styled.div({
     border: "2px solid #2229ED9",
     transition: "all 1s ease",
   },
+  "a": {
+    textDecoration: 'none',
+    color: '#fff',
+    transition: 'color 1s ease'
+
+  },
+  "a:hover": {
+    color: '#22333B',
+    transition: 'color 1s ease'
+  }
 });
 
 export const UserMenu = styled.div({

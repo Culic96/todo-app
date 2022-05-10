@@ -68,39 +68,6 @@ export const MainSettings = styled.div({
     height: '60%'
 });
 
-export const ImmageUploadInput = styled.input({
-    marginTop: '1.5rem',
-    display: 'none',
-});
-
-export const LightDarkBtn = styled.button({
-    position: 'relative',
-    // padding: '1rem 1.2rem',
-    border: '3px solid black',
-    height: '40px',
-    width: '100px',
-    borderRadius: '25px',
-    // marginTop: '1.5rem',
-})
-
-export const BtnCircleSpan = styled.span({
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '30px',
-    width: '30px',
-    borderRadius: '50%',
-    position: 'absolute',
-    border: '2px solid black',
-    left: 1,
-    top: 0,
-    transition: 'all 0.6s ease',
-
-    "&:hover": {
-        transform: 'translateX(60px) scale(1.1)',
-        transition: 'all 0.6s ease',
-    }
-})
 
 export const EditLogoutBtn = styled.button({
     color: "#fff",

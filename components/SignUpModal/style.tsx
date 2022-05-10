@@ -140,9 +140,3 @@ export const SignUpButton = styled.button({
   },
 });
 
-export const LoaderDiv = styled.div({
-  position: 'relative',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-})

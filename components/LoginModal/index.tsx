@@ -5,12 +5,10 @@ import {
   FormControl,
   SignUpButton,
   ExitButton,
-  LoaderDiv,
 } from "./style";
 import { resetPassword } from "../../firebaseFunctions/index";
 import React, { FC, FormEvent, useEffect, useState } from "react";
 import { loginUser } from "../../firebaseFunctions/index";
-import Loader from "../Loader";
 
 const LoginModal: FC<{ isModalOpen: boolean; onClose: () => void }> = ({
   isModalOpen,
@@ -20,7 +18,6 @@ const LoginModal: FC<{ isModalOpen: boolean; onClose: () => void }> = ({
   const labelText: string = "Enter your password";
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -40,7 +37,7 @@ const LoginModal: FC<{ isModalOpen: boolean; onClose: () => void }> = ({
     }
     try {
       await resetPassword(username);
-      alert("Send the password reset!");
+      alert("Sent the password reset to your mail!");
     } catch (error: any) {
       alert(error?.message);
     }
@@ -85,7 +82,7 @@ const LoginModal: FC<{ isModalOpen: boolean; onClose: () => void }> = ({
               <FormControl>
                 <input
                   type="password"
-                  // required
+                  required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
@@ -118,11 +115,6 @@ const LoginModal: FC<{ isModalOpen: boolean; onClose: () => void }> = ({
               >
                 Reset Password
               </SignUpButton>
-              <LoaderDiv>
-                {loading &&
-                  <Loader />
-                }
-              </LoaderDiv>
             </LoginForm>
           </FormHolder>
         </ModalBody>

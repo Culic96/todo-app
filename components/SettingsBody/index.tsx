@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import { AddImageDiv, BodyHolder, BtnCircleSpan, Divider, DividerRight, EditLogoutBtn, EditProfileInput, HelperDiv, ImmageHolder, ImmageUploadInput, LightDarkBtn, MainSettings } from "./style";
+import { AddImageDiv, BodyHolder, Divider, DividerRight, EditLogoutBtn, EditProfileInput, HelperDiv, ImmageHolder, MainSettings } from "./style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCamera, faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faCamera, faCheck, faTimes, faEdit, faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { AppTheme } from "../../Theme/AppTheme";
 import { ThemeContext } from "../../pages/_app";
 import { uploadFile } from "../../firebaseFunctions/storage";
@@ -13,7 +13,7 @@ import { useDocumentData } from "react-firebase-hooks/firestore";
 
 
 const SettingsBody = (children: any) => {
-    const { auth, logoutUser } = useAuth();
+    const { auth } = useAuth();
     const [openForm, setOpenForm] = useState(false);
     const [image, setImage] = useState<File>();
     const { theme, setTheme } = useContext(ThemeContext);
@@ -75,7 +75,6 @@ const SettingsBody = (children: any) => {
             setImage(e.target.files[0]);
         }
     }
-    console.log(auth);
 
     return (
         <BodyHolder style={themeStyle} >
@@ -92,8 +91,16 @@ const SettingsBody = (children: any) => {
                     </ImmageHolder>
                 </HelperDiv>
                 <MainSettings>
-                    <EditLogoutBtn onClick={() => themeToogle()}>Theme</EditLogoutBtn>
-                    <EditLogoutBtn onClick={() => setOpenForm(true)}>Profile</EditLogoutBtn>
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem', position: 'relative' }}>
+                        {theme === "light" &&
+                            < FontAwesomeIcon icon={faSun} style={{ color: 'yellow', fontSize: '24px', position: 'absolute', left: 0 }} />
+                        }
+                        <EditLogoutBtn onClick={() => themeToogle()}>Theme</EditLogoutBtn>
+                        {theme === "dark" &&
+                            <FontAwesomeIcon icon={faMoon} style={{ color: 'grey', fontSize: '24px', position: 'absolute', right: 0 }} />
+                        }
+                    </div>
+                    <EditLogoutBtn onClick={() => setOpenForm(true)}><FontAwesomeIcon icon={faEdit} />Profile</EditLogoutBtn>
                 </MainSettings>
             </Divider>
             <DividerRight>

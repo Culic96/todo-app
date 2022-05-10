@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCheck,
-  faTimes,
+  faSignOut,
+  faAngleDown,
   faCog,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -14,60 +14,14 @@ import {
   UserMenu,
   UserMenuList,
 } from "./style";
-import { db, IProfile } from "../../firebaseFunctions/firestore";
-import { doc, setDoc } from "firebase/firestore";
-import { useDocumentData } from "react-firebase-hooks/firestore";
 import { ThemeContext } from "../../pages/_app";
 import { AppTheme } from "../../Theme/AppTheme";
 import Link from "next/link";
 const Header = () => {
   const { auth, logoutUser } = useAuth();
   const [isUserMenuOpened, setIsUserMenuOpened] = useState(false);
-  const [openForm, setOpenForm] = useState(false);
-  const [userProfile, setUserProfile] = useState<IProfile>({
-    username: "",
-    organization: "",
-    age: "",
-  });
-  const [userProfileEdit, setUserProfileEdit] = useState({
-    username: "",
-    organization: "",
-    age: "",
-  });
-  const [userDoc] = useDocumentData<IProfile>(auth ? doc(db.profiles, auth.userId) : null);
+  const { theme } = useContext(ThemeContext);
 
-
-  useEffect(() => {
-    if (userDoc) {
-      setUserProfile(userDoc);
-      setUserProfileEdit(userDoc);
-    }
-  }, [userDoc]);
-
-
-  const onCancel = () => {
-    setUserProfileEdit(userProfile);
-  }
-
-  const onEdit = async (userProfile: IProfile) => {
-    console.log('[onEditProfile] profile id = ', userProfile.id);
-    if (auth) {
-      await setDoc(
-        doc(db.profiles, auth.userId),
-        {
-          username: userProfile.username,
-          organization: userProfile.organization,
-          age: userProfile.age
-        },
-        { merge: true }
-      );
-    }
-  }
-  const { theme, setTheme } = useContext(ThemeContext);
-
-  const themeToogle = () => {
-    setTheme(theme === "light" ? "dark" : "light")
-  }
 
   const headerStyle: AppTheme = {
     dark: { backgroundColor: '#333', color: "#f2f2f2" },
@@ -91,59 +45,16 @@ const Header = () => {
         {auth && (
           <UserInfo style={themeStyle}>
             <UserMenu style={themeStyle} onClick={() => setIsUserMenuOpened(!isUserMenuOpened)}>
-              <FontAwesomeIcon icon={faCog} style={{ fontSize: '35px' }} />
+              <FontAwesomeIcon icon={faAngleDown} style={{ fontSize: '35px' }} />
             </UserMenu>
             <UserMenuList style={themeStyle} isOpened={isUserMenuOpened}>
-              <button onClick={() => setOpenForm(true)}>Profile</button>
-              {!openForm &&
-                <>
-                  <p>Username: {userProfileEdit.username}</p>
-                  <p>Organization: {userProfileEdit.organization}</p>
-                  <p>Age: {userProfileEdit.age}</p>
-                </>
-              }
-              {openForm &&
-                <>
-                  <p>Username:
-                  <input
-                      type="text"
-                      value={userProfileEdit.username}
-                      onChange={(e) =>
-                        setUserProfileEdit({ ...userProfileEdit, username: e.target.value })}
-                    />
-                  </p>
-                  <p>Organization:
-                <input type="text"
-                      value={userProfileEdit.organization}
-                      onChange={(e) => setUserProfileEdit({ ...userProfileEdit, organization: e.target.value })}
-                    />
-                  </p>
-                  <p>Age:
-                    <input type="text"
-                      value={userProfileEdit.age}
-                      onChange={(e) => setUserProfileEdit({ ...userProfileEdit, age: e.target.value })}
-                    />
-                  </p>
-                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: "center", gap: "1rem", marginBottom: "1rem" }}>
-                    <FontAwesomeIcon icon={faCheck} style={{ color: 'green' }}
-                      onClick={() => {
-                        setOpenForm(false);
-                        onEdit(userProfileEdit)
-                      }} />
-                    <FontAwesomeIcon icon={faTimes} style={{ color: 'red' }}
-                      onClick={() => {
-                        setOpenForm(false);
-                        onCancel();
-                      }} />
-                  </div>
-                </>
-              }
-              <button onClick={() => themeToogle()}>Theme</button>
+              <button><FontAwesomeIcon icon={faCog} /><Link href="/settings">Settings</Link></button>
               <button onClick={() => {
                 logoutUser();
                 setIsUserMenuOpened(!isUserMenuOpened);
-              }}>Logout</button>
-              <Link href="/settings">Settings</Link>
+              }}>
+                <FontAwesomeIcon icon={faSignOut} />
+                Logout</button>
             </UserMenuList>
           </UserInfo>
         )}
