@@ -9,6 +9,12 @@ export const BodyHolder = styled.div({
     display: 'flex',
     boxShadow:
         "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
+    "@media (max-width: 950px)": {
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        flexDirection: 'column'
+    },
+
 })
 
 export const Divider = styled.div({
@@ -39,6 +45,10 @@ export const ImmageHolder = styled.div({},
         background: `url("../../img/profileDefault.png")`,
         backgroundSize: 'cover',
         backgroundPosition: 'center center',
+        "@media (max-width: 400px)": {
+            width: '100px',
+            height: '100px'
+        }
     },
 );
 
@@ -53,7 +63,13 @@ export const AddImageDiv = styled.div({
     transform: 'translate(-95%, -95%)',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    "@media (max-width: 400px)": {
+        width: '30px',
+        height: '30px',
+        top: '100%',
+        left: '100%'
+    }
 },
 
 )
@@ -65,8 +81,9 @@ export const MainSettings = styled.div({
     alignItems: 'center',
     flexDirection: 'column',
     width: '100%',
-    height: '60%'
-});
+    height: '60%',
+},
+);
 
 
 export const EditLogoutBtn = styled.button({
@@ -97,7 +114,10 @@ export const DividerRight = styled.div({
     alignItems: 'center',
     height: '80vh',
     flexDirection: 'column',
-    width: '50%'
+    width: '50%',
+    "@media (max-width: 400px)": {
+        width: '100%',
+    }
 })
 
 export const EditProfileInput = styled.input({
@@ -107,5 +127,7 @@ export const EditProfileInput = styled.input({
     borderBottom: '2px solid #229ED9',
     "&:focus": {
         borderBottom: '2px solid #229ED9',
-    }
+    },
+
 })
+
